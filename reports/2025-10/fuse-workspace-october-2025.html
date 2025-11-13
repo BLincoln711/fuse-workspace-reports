@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuse Workspace - October 2025 Campaign Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #f8f9fa;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header .period {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .header .comparison {
+            font-size: 1em;
+            color: #95a5a6;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .metric-card.positive {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .metric-card.negative {
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+        }
+
+        .metric-card.neutral {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .metric-card h3 {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .metric-card .value {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .metric-card .change {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .insights {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .insights h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .insights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .insights li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .insights li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+
+        thead {
+            background: #2c3e50;
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .positive-change {
+            color: #27ae60;
+            font-weight: 600;
+        }
+
+        .negative-change {
+            color: #e74c3c;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-enabled {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-paused {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .location-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .location-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .campaign-row {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+
+        .campaign-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .campaign-name {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #2c3e50;
+        }
+
+        .campaign-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .campaign-metric {
+            text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .campaign-metric .label {
+            font-size: 0.8em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        .campaign-metric .value {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .recommendations {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .recommendations h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .recommendations li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #856404;
+        }
+
+        .recommendations li:before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fuse Workspace Campaign Report</h1>
+            <div class="period">October 1, 2025 - October 31, 2025</div>
+            <div class="comparison">Compared to: September 1, 2025 - September 30, 2025</div>
+        </div>
+
+        <div class="summary">
+            <div class="metric-card positive">
+                <h3>Total Cost</h3>
+                <div class="value">$22,877</div>
+                <div class="change">↑ $476 (+2.12%)</div>
+            </div>
+            <div class="metric-card negative">
+                <h3>Total Clicks</h3>
+                <div class="value">3,273</div>
+                <div class="change">↓ 2,102 (-39.11%)</div>
+            </div>
+            <div class="metric-card negative">
+                <h3>Conversions</h3>
+                <div class="value">93</div>
+                <div class="change">↓ 48 (-34.04%)</div>
+            </div>
+            <div class="metric-card neutral">
+                <h3>Avg. CPC</h3>
+                <div class="value">$6.99</div>
+                <div class="change">↑ $2.82 (+67.71%)</div>
+            </div>
+            <div class="metric-card neutral">
+                <h3>Cost per Conversion</h3>
+                <div class="value">$245.99</div>
+                <div class="change">↑ $87.12 (+54.83%)</div>
+            </div>
+            <div class="metric-card positive">
+                <h3>Conversion Rate</h3>
+                <div class="value">0.78%</div>
+                <div class="change">↑ 0.28% (+54.7%)</div>
+            </div>
+        </div>
+
+        <div class="insights">
+            <h3>Key Insights</h3>
+            <ul>
+                <li>Overall spending increased by 2.12% ($476) while clicks decreased by 39.11%, indicating higher competition and CPC</li>
+                <li>Average CPC jumped 67.71% from $4.17 to $6.99, suggesting increased competition in target markets</li>
+                <li>Conversions dropped 34.04% despite improved conversion rate, primarily due to reduced click volume</li>
+                <li>Performance Max campaigns show better efficiency with lower CPC compared to Search campaigns</li>
+                <li>Houston CityCentre P-Max remains the highest spending campaign at $6,041.91 with 30 conversions</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Campaign Performance by Type</h2>
+
+            <div class="location-section">
+                <h3>Search Campaigns</h3>
+                <p style="margin-bottom: 20px;"><strong>Total:</strong> $5,248.21 | 567 Clicks | 9 Conversions | $583.13 Cost/Conv</p>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">HOU | CityCentre | Search | Max Clicks</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$751.79</div>
+                            <div class="negative-change">-4.1%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">106</div>
+                            <div class="positive-change">+6%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">1</div>
+                            <div class="positive-change">+1</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$7.09</div>
+                            <div class="negative-change">-9.53%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">0.94%</div>
+                            <div class="positive-change">+0.94%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | East MLK | Leads | Search</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$2,996.44</div>
+                            <div class="negative-change">-2.06%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">253</div>
+                            <div class="positive-change">+10.96%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">3</div>
+                            <div class="negative-change">-50%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$11.84</div>
+                            <div class="negative-change">-11.74%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">1.19%</div>
+                            <div class="negative-change">-54.94%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | Bee Caves | Search | Conversions</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$739.94</div>
+                            <div class="negative-change">-2.37%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">81</div>
+                            <div class="negative-change">-10%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">0</div>
+                            <div class="negative-change">-100%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$9.14</div>
+                            <div class="positive-change">+8.48%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">0%</div>
+                            <div class="negative-change">-100%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | Four Points | Search | Max Clicks</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$760.04</div>
+                            <div class="value" style="font-size: 0.9em;">0%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">127</div>
+                            <div class="negative-change">-21.6%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">5</div>
+                            <div class="negative-change">-64.29%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$5.98</div>
+                            <div class="positive-change">+27.55%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">3.94%</div>
+                            <div class="negative-change">-54.44%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-section">
+                <h3>Performance Max Campaigns</h3>
+                <p style="margin-bottom: 20px;"><strong>Total:</strong> $17,629.09 | 2,706 Clicks | 84 Conversions | $209.87 Cost/Conv</p>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">HOU | CityCentre | P-Max</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$6,041.91</div>
+                            <div class="positive-change">+5.62%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">1,028</div>
+                            <div class="negative-change">-54.73%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">30</div>
+                            <div class="negative-change">-42.31%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$5.88</div>
+                            <div class="positive-change">+133.33%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">1.53%</div>
+                            <div class="positive-change">+87.21%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | East MLK | Leads | Performance Max</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$3,742.38</div>
+                            <div class="negative-change">-1.54%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">591</div>
+                            <div class="negative-change">-29.14%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">12</div>
+                            <div class="negative-change">-36.84%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$6.33</div>
+                            <div class="positive-change">+38.95%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">0.2%</div>
+                            <div class="positive-change">+7.71%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | Dripping Springs | Leads | Performance Max</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$961.59</div>
+                            <div class="negative-change">-4.33%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">151</div>
+                            <div class="negative-change">-1.95%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">13</div>
+                            <div class="positive-change">+30%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$6.37</div>
+                            <div class="negative-change">-2.43%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">3.47%</div>
+                            <div class="positive-change">+427.97%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | Four Points | Leads | Performance Max</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$3,046.53</div>
+                            <div class="positive-change">+0.2%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">460</div>
+                            <div class="negative-change">-36.55%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">15</div>
+                            <div class="negative-change">-16.67%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$6.62</div>
+                            <div class="positive-change">+57.92%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">1.6%</div>
+                            <div class="positive-change">+226.57%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campaign-row">
+                    <div class="campaign-header">
+                        <div class="campaign-name">ATX | Bee Caves | Leads | Performance Max</div>
+                        <span class="status-badge status-enabled">Enabled</span>
+                    </div>
+                    <div class="campaign-metrics">
+                        <div class="campaign-metric">
+                            <div class="label">Cost</div>
+                            <div class="value">$3,836.68</div>
+                            <div class="positive-change">+10.47%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Clicks</div>
+                            <div class="value">476</div>
+                            <div class="negative-change">-41.31%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conversions</div>
+                            <div class="value">14</div>
+                            <div class="negative-change">-22.22%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Avg. CPC</div>
+                            <div class="value">$8.06</div>
+                            <div class="positive-change">+88.22%</div>
+                        </div>
+                        <div class="campaign-metric">
+                            <div class="label">Conv. Rate</div>
+                            <div class="value">0.74%</div>
+                            <div class="positive-change">+114.88%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendations">
+            <h3>Recommendations & Action Items</h3>
+            <ul>
+                <li><strong>ATX | Bee Caves | Search:</strong> Zero conversions in October - Consider pausing or restructuring this campaign to improve performance</li>
+                <li><strong>Rising CPCs:</strong> Average CPC increased 67.71% - Review bid strategies and consider budget reallocation to better-performing campaigns</li>
+                <li><strong>Performance Max Efficiency:</strong> P-Max campaigns show 64% lower cost per conversion ($209.87) vs Search ($583.13) - Consider increasing P-Max budgets</li>
+                <li><strong>Dripping Springs Success:</strong> Best performing location with 3.47% conv. rate (+427.97%) - Increase budget from $33/day to capitalize on performance</li>
+                <li><strong>Houston CityCentre:</strong> Highest spend at $6,041.91 - Optimize to reduce CPC which increased 133.33%</li>
+                <li><strong>Click Volume:</strong> 39% decrease in clicks suggests bid strategy review needed to maintain visibility while controlling costs</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p><strong>Report Generated:</strong> November 12, 2025</p>
+            <p>Powered by <a href="https://hendricks.ai" style="color: #3498db; text-decoration: none;">Hendricks.AI</a></p>
+        </div>
+    </div>
+</body>
+</html>
