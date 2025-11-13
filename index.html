@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Monthly performance reports for Fuse Workspace locations">
+    <title>Fuse Workspace - Monthly Reports</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Fuse Workspace</h1>
+            <p>Monthly Performance Reports</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="reports-container">
+            <!-- Reports will be dynamically loaded here -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Fuse Workspace. All rights reserved.</p>
+            <p>Powered by <a href="https://hendricks.ai" target="_blank">Hendricks.AI</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Report data structure - Update this array when adding new reports
+        const reports = [
+            // Example structure - uncomment and modify when adding real reports:
+            // {
+            //     title: "January 2025 Report",
+            //     date: "January 2025",
+            //     description: "Monthly performance metrics and analytics for all Fuse Workspace locations.",
+            //     file: "reports/2025-01/fuse-workspace-january-2025.pdf"
+            // },
+            // {
+            //     title: "February 2025 Report",
+            //     date: "February 2025",
+            //     description: "Monthly performance metrics and analytics for all Fuse Workspace locations.",
+            //     file: "reports/2025-02/fuse-workspace-february-2025.pdf"
+            // }
+        ];
+
+        // Function to render reports
+        function renderReports() {
+            const container = document.getElementById('reports-container');
+
+            if (reports.length === 0) {
+                container.innerHTML = `
+                    <div class="no-reports">
+                        <h2>No Reports Available Yet</h2>
+                        <p>Monthly reports will be posted here soon.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort reports by date (newest first)
+            const sortedReports = [...reports].reverse();
+
+            const reportsGrid = document.createElement('div');
+            reportsGrid.className = 'reports-grid';
+
+            sortedReports.forEach(report => {
+                const card = document.createElement('div');
+                card.className = 'report-card';
+
+                card.innerHTML = `
+                    <h3>${report.title}</h3>
+                    <div class="date">${report.date}</div>
+                    <div class="description">${report.description}</div>
+                    <a href="${report.file}" class="btn" target="_blank">View Report</a>
+                `;
+
+                reportsGrid.appendChild(card);
+            });
+
+            container.appendChild(reportsGrid);
+        }
+
+        // Load reports on page load
+        document.addEventListener('DOMContentLoaded', renderReports);
+    </script>
+</body>
+</html>
