@@ -101,7 +101,7 @@
 
         .locations-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -211,6 +211,55 @@
             border-radius: 8px;
         }
 
+        .conversion-breakdown {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .conversion-breakdown-title {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .conversion-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .conversion-type {
+            text-align: center;
+            padding: 15px 10px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .conversion-type-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .conversion-type-label {
+            font-size: 0.75em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .conversion-type-value {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
         .footer {
             margin-top: 60px;
             padding-top: 30px;
@@ -261,6 +310,10 @@
             }
 
             .overview-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .conversion-types {
                 grid-template-columns: 1fr;
             }
         }
@@ -317,7 +370,7 @@
                 </div>
 
                 <div class="metric-row">
-                    <div class="metric-label">Conversions</div>
+                    <div class="metric-label">Total Conversions</div>
                     <div class="metric-value-group">
                         <span class="metric-value">31</span>
                         <div class="metric-change negative-change">↓ 40.38%</div>
@@ -339,6 +392,27 @@
                         <div class="metric-change positive-change">↑ 70.54%</div>
                     </div>
                 </div>
+
+                <div class="conversion-breakdown">
+                    <div class="conversion-breakdown-title">Conversion Breakdown</div>
+                    <div class="conversion-types">
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📋</div>
+                            <div class="conversion-type-label">Form Fills</div>
+                            <div class="conversion-type-value">15</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📞</div>
+                            <div class="conversion-type-label">Call Leads</div>
+                            <div class="conversion-type-value">1</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📅</div>
+                            <div class="conversion-type-label">Appointments</div>
+                            <div class="conversion-type-value">15</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Austin East MLK -->
@@ -357,7 +431,7 @@
                 </div>
 
                 <div class="metric-row">
-                    <div class="metric-label">Conversions</div>
+                    <div class="metric-label">Total Conversions</div>
                     <div class="metric-value-group">
                         <span class="metric-value">15</span>
                         <div class="metric-change negative-change">↓ 40.00%</div>
@@ -379,6 +453,27 @@
                         <div class="metric-change positive-change">↑ 63.53%</div>
                     </div>
                 </div>
+
+                <div class="conversion-breakdown">
+                    <div class="conversion-breakdown-title">Conversion Breakdown</div>
+                    <div class="conversion-types">
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📋</div>
+                            <div class="conversion-type-label">Form Fills</div>
+                            <div class="conversion-type-value">7</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📞</div>
+                            <div class="conversion-type-label">Call Leads</div>
+                            <div class="conversion-type-value">0</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📅</div>
+                            <div class="conversion-type-label">Appointments</div>
+                            <div class="conversion-type-value">8</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Austin Dripping Springs - BEST PERFORMER -->
@@ -397,7 +492,7 @@
                 </div>
 
                 <div class="metric-row">
-                    <div class="metric-label">Conversions</div>
+                    <div class="metric-label">Total Conversions</div>
                     <div class="metric-value-group">
                         <span class="metric-value">13</span>
                         <div class="metric-change positive-change">↑ 30.00%</div>
@@ -419,6 +514,27 @@
                         <div class="metric-change negative-change">↓ 26.41%</div>
                     </div>
                 </div>
+
+                <div class="conversion-breakdown">
+                    <div class="conversion-breakdown-title">Conversion Breakdown</div>
+                    <div class="conversion-types">
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📋</div>
+                            <div class="conversion-type-label">Form Fills</div>
+                            <div class="conversion-type-value">7</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📞</div>
+                            <div class="conversion-type-label">Call Leads</div>
+                            <div class="conversion-type-value">0</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📅</div>
+                            <div class="conversion-type-label">Appointments</div>
+                            <div class="conversion-type-value">6</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Austin Bee Caves -->
@@ -437,7 +553,7 @@
                 </div>
 
                 <div class="metric-row">
-                    <div class="metric-label">Conversions</div>
+                    <div class="metric-label">Total Conversions</div>
                     <div class="metric-value-group">
                         <span class="metric-value">14</span>
                         <div class="metric-change negative-change">↓ 36.36%</div>
@@ -459,6 +575,27 @@
                         <div class="metric-change positive-change">↑ 69.81%</div>
                     </div>
                 </div>
+
+                <div class="conversion-breakdown">
+                    <div class="conversion-breakdown-title">Conversion Breakdown</div>
+                    <div class="conversion-types">
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📋</div>
+                            <div class="conversion-type-label">Form Fills</div>
+                            <div class="conversion-type-value">7</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📞</div>
+                            <div class="conversion-type-label">Call Leads</div>
+                            <div class="conversion-type-value">0</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📅</div>
+                            <div class="conversion-type-label">Appointments</div>
+                            <div class="conversion-type-value">7</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Austin Four Points -->
@@ -477,7 +614,7 @@
                 </div>
 
                 <div class="metric-row">
-                    <div class="metric-label">Conversions</div>
+                    <div class="metric-label">Total Conversions</div>
                     <div class="metric-value-group">
                         <span class="metric-value">20</span>
                         <div class="metric-change negative-change">↓ 37.50%</div>
@@ -497,6 +634,27 @@
                     <div class="metric-value-group">
                         <span class="metric-value">$190</span>
                         <div class="metric-change positive-change">↑ 60.13%</div>
+                    </div>
+                </div>
+
+                <div class="conversion-breakdown">
+                    <div class="conversion-breakdown-title">Conversion Breakdown</div>
+                    <div class="conversion-types">
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📋</div>
+                            <div class="conversion-type-label">Form Fills</div>
+                            <div class="conversion-type-value">8.5</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📞</div>
+                            <div class="conversion-type-label">Call Leads</div>
+                            <div class="conversion-type-value">4</div>
+                        </div>
+                        <div class="conversion-type">
+                            <div class="conversion-type-icon">📅</div>
+                            <div class="conversion-type-label">Appointments</div>
+                            <div class="conversion-type-value">7.5</div>
+                        </div>
                     </div>
                 </div>
             </div>
